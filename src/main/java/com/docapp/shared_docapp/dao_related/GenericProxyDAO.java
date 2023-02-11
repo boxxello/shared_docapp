@@ -136,8 +136,8 @@ public class GenericProxyDAO {
     }
 
     //doUpdate
-    public static <T> void doUpdate(T entity, DAO<T> dao, PrintWriter out) throws SQLException {
-        dao.doUpdate(entity);
+    public static <T> void doUpdate(String condition, T entity, DAO<T> dao, PrintWriter out) throws SQLException {
+        dao.doUpdate(condition, entity);
         Gson builder = new GsonBuilder().setPrettyPrinting().create();
 
         String json = builder.toJson(entity);

@@ -6,6 +6,7 @@ import com.docapp.shared_docapp.dao_related.SQLDAO;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 
 public class StudenteDAO extends SQLDAO implements DAO<Studente> {
@@ -28,14 +29,10 @@ public class StudenteDAO extends SQLDAO implements DAO<Studente> {
         return null;
     }
 
-    @Override
-    public List<Studente> doRetrieveByConditionWithLimitAndOffsetAndOrder(String condition, int limit, int offset, String order) throws SQLException {
-        return null;
-    }
 
     @Override
-    public Studente doRetrieveByKey(String key) throws SQLException {
-        return null;
+    public Studente doRetrieveByKeyValue(HashMap<String, String> hash) throws SQLException {
+        return GenericDAO.genericDoRetrieveByKeyValue(Studente.TABLE_NAME, hash, new StudenteExtractor(), source);
     }
 
     @Override
@@ -50,16 +47,18 @@ public class StudenteDAO extends SQLDAO implements DAO<Studente> {
 
     @Override
     public List<Studente> doRetrieveAllWithLimitAndOffset(int limit, int offset) throws SQLException {
-        return null;
+        return GenericDAO.genericDoRetrieveAllWithLimitAndOffset(Studente.TABLE_NAME, limit, offset, new StudenteExtractor(), source);
     }
 
     @Override
     public void doSave(Studente object) throws SQLException {
+        GenericDAO.genericDoSave(Studente.TABLE_NAME, object.toHashMap(), source);
 
     }
 
     @Override
-    public void doUpdate(Studente object) throws SQLException {
+    public List<Studente> doUpdate(String condition, Studente object) throws SQLException {
+        return GenericDAO.genericDoUpdate(Studente.TABLE_NAME, condition, object.toHashMap(), new StudenteExtractor(), source);
 
     }
 

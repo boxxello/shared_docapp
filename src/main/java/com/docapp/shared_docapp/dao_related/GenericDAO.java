@@ -71,21 +71,33 @@ public class GenericDAO<T> {
      * e verifico se è andato a buon fine restituendo rows > 0
      **/
 
-    public static boolean genericDoUpdate(String table, String condition, Map<String, ?> values, DataSource source) throws SQLException {
-
-        int rows;
+    public static <E extends ResultSetExtractor<T>, T> List<T> genericDoUpdate(String table, String condition, Map<String, ?> values,
+                                                                               E extractor, DataSource source) throws SQLException {
+        //ritorna la lista di oggetti aggiornati
+        final List<T> entity = new ArrayList<>();
         try (Connection conn = source.getConnection()) {
 
+
             String query = QueryBuilder.UPDATE(table).SET(values).WHERE(condition).toString();
-
+            String query_select_before_update = QueryBuilder.SELECT("*").FROM(table).WHERE(condition).toString();
             logger.info("[GENERIC-DO-UPDATE] " + query);
+            logger.info("[GENERIC-DO-UPDATE] " + query_select_before_update);
 
-            try (PreparedStatement ps = conn.prepareStatement(query)) {
+            try (PreparedStatement ps = conn.prepareStatement(query_select_before_update)) {
+                ResultSet set = ps.executeQuery();
 
-                rows = ps.executeUpdate();
+                while (set.next()) {
+                    entity.add(extractor.extract(set));
+                }
+
             }
+            try (PreparedStatement ps = conn.prepareStatement(query)) {
+                ps.executeUpdate();
+            }
+
         }
-        return rows > 0;
+        return entity;
+
     }
 
     /**
@@ -158,5 +170,48 @@ public class GenericDAO<T> {
         return entity;
     }
 
+    public static <E extends ResultSetExtractor<T>, T> List<T> genericDoRetrieveAllWithLimitAndOffset(String table, int limit, int offset, E extractor, DataSource source) throws SQLException {
 
+        final List<T> entity = new ArrayList<>();
+
+        try (Connection conn = source.getConnection()) {
+
+            String query = QueryBuilder.SELECT("*").FROM(table).LIMIT(offset, limit).toString();
+
+            logger.info("[GENERIC-DO-RETRIEVE-ALL-WITH-LIMIT-AND-OFFSET] " + query);
+            try (PreparedStatement ps = conn.prepareStatement(query)) {
+                ResultSet set = ps.executeQuery();
+
+                while (set.next()) {
+                    entity.add(extractor.extract(set));
+                }
+            }
+        }
+        return entity;
+    }
+
+
+    public static <E extends ResultSetExtractor<T>, T> List<T> genericDoRetrieveByKey(String table, HashMap<String, String> hashmap, E extractor, DataSource source) throws SQLException {
+
+        final List<T> entity = new ArrayList<>();
+
+        try (Connection conn = source.getConnection()) {
+            QueryBuilder query_builder= QueryBuilder.SELECT("*").FROM(table);
+            for (Map.Entry<String, String> entry : hashmap.entrySet()) {
+                query_builder.WHERE(entry.getKey() + " = " + entry.getValue());
+            }
+            String query = query_builder.toString();
+
+            logger.info("[GENERIC-DO-RETRIEVE-BY-KEY] " + query);
+
+            try (PreparedStatement ps = conn.prepareStatement(query)) {
+                ResultSet set = ps.executeQuery();
+
+                while (set.next()) {
+                    entity.add(extractor.extract(set));
+                }
+            }
+        }
+        return entity;
+    }
 }
