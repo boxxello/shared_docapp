@@ -57,21 +57,9 @@ public class GenericProxyDAO {
         return result;
     }
 
-    public static <T> List<T> doRetrieveByConditionWithLimitAndOffsetAndOrder(String condition, int limit, int offset, String order, DAO<T> dao, PrintWriter out) throws SQLException {
-        List<T> result = dao.doRetrieveByConditionWithLimitAndOffsetAndOrder(condition, limit, offset, order);
-        Gson builder = new GsonBuilder().setPrettyPrinting().create();
 
-        String json = builder.toJson(result);
-        HashMap<String, String> map = new HashMap<>();
-        map.put("status", "success");
-        map.put("result", json);
-        //send response
-        out.println(builder.toJson(map));
-        return result;
-    }
-
-    public static <T> T doRetrieveByKey(String key, DAO<T> dao, PrintWriter out) throws SQLException {
-        T result = dao.doRetrieveByKey(key);
+    public static <T> List<T> doRetrieveByHashMap(HashMap<String, String> hashMap, DAO<T> dao, PrintWriter out) throws SQLException {
+        List<T> result = dao.doRetrieveByHashMap(hashMap);
         Gson builder = new GsonBuilder().setPrettyPrinting().create();
 
         String json = builder.toJson(result);
@@ -137,15 +125,18 @@ public class GenericProxyDAO {
 
     //doUpdate
     public static <T> void doUpdate(String condition, T entity, DAO<T> dao, PrintWriter out) throws SQLException {
-        dao.doUpdate(condition, entity);
+        List<T> result =  dao.doUpdate(condition, entity);
+
         Gson builder = new GsonBuilder().setPrettyPrinting().create();
 
-        String json = builder.toJson(entity);
+        String json = builder.toJson(result);
         HashMap<String, String> map = new HashMap<>();
         map.put("status", "success");
         map.put("result", json);
         //send response
         out.println(builder.toJson(map));
+
+
     }
 
     //doDelete

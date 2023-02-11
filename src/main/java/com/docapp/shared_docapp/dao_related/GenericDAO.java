@@ -191,7 +191,7 @@ public class GenericDAO<T> {
     }
 
 
-    public static <E extends ResultSetExtractor<T>, T> List<T> genericDoRetrieveByKey(String table, HashMap<String, String> hashmap, E extractor, DataSource source) throws SQLException {
+    public static <E extends ResultSetExtractor<T>, T> List<T> genericDoRetrievebyHashMap(String table, HashMap<String, String> hashmap, E extractor, DataSource source) throws SQLException {
 
         final List<T> entity = new ArrayList<>();
 

@@ -21,8 +21,9 @@ public class StudenteDAO extends SQLDAO implements DAO<Studente> {
 
     @Override
     public List<Studente> doRetrieveByConditionWithLimit(String condition, int limit) throws SQLException {
-        return GenericDAO.genericDoRetrieveByConditionWithLimit(Studente.TABLE_NAME, condition, limit, new StudenteExtractor(), source);
+        return null;
     }
+
 
     @Override
     public List<Studente> doRetrieveByConditionWithLimitAndOffset(String condition, int limit, int offset) throws SQLException {
@@ -31,8 +32,8 @@ public class StudenteDAO extends SQLDAO implements DAO<Studente> {
 
 
     @Override
-    public Studente doRetrieveByKeyValue(HashMap<String, String> hash) throws SQLException {
-        return GenericDAO.genericDoRetrieveByKeyValue(Studente.TABLE_NAME, hash, new StudenteExtractor(), source);
+    public List<Studente> doRetrieveByHashMap(HashMap<String, String> hashmap) throws SQLException {
+        return GenericDAO.genericDoRetrievebyHashMap(Studente.TABLE_NAME, hashmap, new StudenteExtractor(), source);
     }
 
     @Override
