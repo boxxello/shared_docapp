@@ -4,8 +4,8 @@ import com.docapp.shared_docapp.Extractors.FeedbackExtractor;
 import com.docapp.shared_docapp.dao_related.DAO;
 import com.docapp.shared_docapp.dao_related.GenericDAO;
 import com.docapp.shared_docapp.dao_related.SQLDAO;
-import com.docapp.shared_docapp.models.Caricamento;
 import com.docapp.shared_docapp.models.Feedback;
+
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
