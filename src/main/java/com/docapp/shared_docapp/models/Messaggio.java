@@ -1,8 +1,5 @@
 package com.docapp.shared_docapp.models;
 
-import com.docapp.shared_docapp.dao_related.IEntity;
-
-import java.sql.Timestamp;
 import java.util.HashMap;
 
 public class Messaggio implements IEntity {

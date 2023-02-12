@@ -1,7 +1,5 @@
 package com.docapp.shared_docapp.models;
 
-import com.docapp.shared_docapp.dao_related.IEntity;
-
 import java.util.HashMap;
 
 public class Post implements IEntity {
