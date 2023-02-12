@@ -1,6 +1,11 @@
 package com.docapp.shared_docapp.models;
 
-public class Interazione_Post {
+import com.docapp.shared_docapp.dao_related.IEntity;
+
+import java.util.HashMap;
+
+public class Interazione_Post implements IEntity {
+    public static final String TABLE_NAME ="interazione_post";
     private int id_documento;
     private String email_studente;
 
@@ -25,5 +30,13 @@ public class Interazione_Post {
 
     public void setEmail_studente(String email_studente) {
         this.email_studente = email_studente;
+    }
+
+    @Override
+    public HashMap<String, ?> toHashMap() {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("id_documento", id_documento);
+        map.put("email_studente", email_studente);
+        return map;
     }
 }

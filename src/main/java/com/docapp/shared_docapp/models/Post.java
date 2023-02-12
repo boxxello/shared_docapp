@@ -1,12 +1,18 @@
 package com.docapp.shared_docapp.models;
 
-public class Post {
+import com.docapp.shared_docapp.dao_related.IEntity;
+
+import java.util.HashMap;
+
+public class Post implements IEntity {
+    public static final String TABLE_NAME = "post";
     private String titolo, testo, id_post;
     private boolean is_domanda;
 
-    public Post(){}
+    public Post() {
+    }
 
-    public Post(String titolo, String testo, boolean is_domanda){
+    public Post(String titolo, String testo, boolean is_domanda) {
         this.titolo = titolo;
         this.testo = testo;
         this.is_domanda = is_domanda;
@@ -42,5 +48,15 @@ public class Post {
 
     public void setTitolo(String titolo) {
         this.titolo = titolo;
+    }
+
+    @Override
+    public HashMap<String, ?> toHashMap() {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("titolo", titolo);
+        map.put("testo", testo);
+        map.put("is_domanda", is_domanda);
+        return map;
+
     }
 }

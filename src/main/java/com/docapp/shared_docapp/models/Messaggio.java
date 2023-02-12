@@ -1,8 +1,12 @@
 package com.docapp.shared_docapp.models;
 
-import java.sql.Timestamp;
+import com.docapp.shared_docapp.dao_related.IEntity;
 
-public class Messaggio {
+import java.sql.Timestamp;
+import java.util.HashMap;
+
+public class Messaggio implements IEntity {
+    public static final String TABLE_NAME ="messaggio";
     private String  email_studente, testo, tms;
     private int id_conversazione, id_messaggio;
 
@@ -53,5 +57,16 @@ public class Messaggio {
 
     public void setEmail_studente(String email_studente) {
         this.email_studente = email_studente;
+    }
+
+    @Override
+    public HashMap<String, ?> toHashMap() {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("id_messaggio", id_messaggio);
+        map.put("id_conversazione", id_conversazione);
+        map.put("email_studente", email_studente);
+        map.put("testo", testo);
+        map.put("tms", tms);
+        return map;
     }
 }

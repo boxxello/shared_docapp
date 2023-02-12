@@ -1,8 +1,12 @@
 package com.docapp.shared_docapp.models;
 
-import java.io.Serializable;
+import com.docapp.shared_docapp.dao_related.IEntity;
 
-public class Feedback implements Serializable {
+import java.io.Serializable;
+import java.util.HashMap;
+
+public class Feedback implements Serializable, IEntity {
+    public static final String TABLE_NAME ="feedback";
     private int id;
     private String email;
 
@@ -27,5 +31,13 @@ public class Feedback implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Override
+    public HashMap<String, ?> toHashMap() {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("id", id);
+        map.put("email", email);
+        return map;
     }
 }

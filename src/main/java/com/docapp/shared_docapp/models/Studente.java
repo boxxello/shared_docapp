@@ -11,9 +11,10 @@ public class Studente implements Serializable, IEntity {
     private String email, nickname, password;
     private boolean is_admin;
 
-    public Studente(){}
+    public Studente() {
+    }
 
-    public Studente(String email, String nickname, String password, boolean is_admin){
+    public Studente(String email, String nickname, String password, boolean is_admin) {
         this.email = email;
         this.nickname = nickname;
         this.password = password;
@@ -52,6 +53,7 @@ public class Studente implements Serializable, IEntity {
         this.nickname = nickname;
     }
 
+
     @Override
     public HashMap<String, ?> toHashMap() {
 
@@ -63,8 +65,4 @@ public class Studente implements Serializable, IEntity {
         return map;
     }
 
-    @Override
-    public HashMap<String, ?> toHashMap(String... fields) {
-        return null;
-    }
 }

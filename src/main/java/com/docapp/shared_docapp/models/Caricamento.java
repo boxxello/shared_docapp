@@ -1,13 +1,18 @@
 package com.docapp.shared_docapp.models;
 
-public class Caricamento {
-    public static final String TABLE_NAME ="caricamento" ;
+import com.docapp.shared_docapp.dao_related.IEntity;
+
+import java.util.HashMap;
+
+public class Caricamento implements IEntity {
+    public static final String TABLE_NAME = "caricamento";
     private int id;
     private String email;
 
-    public Caricamento(){}
+    public Caricamento() {
+    }
 
-    public Caricamento(int id, String email){
+    public Caricamento(int id, String email) {
         this.id = id;
         this.email = email;
     }
@@ -27,4 +32,16 @@ public class Caricamento {
     public void setId(int id) {
         this.id = id;
     }
+
+    @Override
+    public HashMap<String, ?> toHashMap() {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("id", id);
+        map.put("email", email);
+        return map;
+    }
+
+
+
+
 }

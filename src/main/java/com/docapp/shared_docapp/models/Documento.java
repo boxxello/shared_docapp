@@ -1,8 +1,12 @@
 package com.docapp.shared_docapp.models;
 
-import java.io.Serializable;
+import com.docapp.shared_docapp.dao_related.IEntity;
 
-public class Documento implements Serializable {
+import java.io.Serializable;
+import java.util.HashMap;
+
+public class Documento implements Serializable, IEntity {
+    public static final String TABLE_NAME ="documento";
     private String nome, descrizione, universita, facolta, corso_di_studio, path;
     private int dimensione, id_documento;
 
@@ -80,5 +84,19 @@ public class Documento implements Serializable {
 
     public void setId_documento(int id_documento) {
         this.id_documento = id_documento;
+    }
+
+    @Override
+    public HashMap<String, ?> toHashMap() {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("id_documento", id_documento);
+        map.put("nome", nome);
+        map.put("descrizione", descrizione);
+        map.put("universita", universita);
+        map.put("facolta", facolta);
+        map.put("corso_di_studio", corso_di_studio);
+        map.put("path", path);
+        map.put("dimensione", dimensione);
+        return map;
     }
 }

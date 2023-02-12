@@ -23,7 +23,7 @@ public class CaricamentoDAO extends SQLDAO implements DAO<Caricamento> {
 
     @Override
     public List<Caricamento> doRetrieveByConditionWithLimit(String condition, int limit) throws SQLException {
-        return GenericDAO.genericDoRetrieveByConditionWithLimit(Caricamento.TABLE_NAME, condition, limit, new CaricamentoExtractor(), source
+        return GenericDAO.genericDoRetrieveByConditionWithLimit(Caricamento.TABLE_NAME, condition, limit, new CaricamentoExtractor(), source);
     }
 
     @Override
@@ -38,12 +38,12 @@ public class CaricamentoDAO extends SQLDAO implements DAO<Caricamento> {
 
     @Override
     public List<Caricamento> doRetrieveAll() throws SQLException {
-       return GenericDAO.genericDoRetrieveAll(Caricamento.TABLE_NAME, new CaricamentoExtractor(), source);
+        return GenericDAO.genericDoRetrieveAll(Caricamento.TABLE_NAME, new CaricamentoExtractor(), source);
     }
 
     @Override
     public List<Caricamento> doRetrieveAllWithLimit(int limit) throws SQLException {
-            return GenericDAO.genericDoRetrieveAllWithLimit(Caricamento.TABLE_NAME, limit, new CaricamentoExtractor(), source);
+        return GenericDAO.genericDoRetrieveAllWithLimit(Caricamento.TABLE_NAME, limit, new CaricamentoExtractor(), source);
     }
 
     @Override
@@ -53,12 +53,12 @@ public class CaricamentoDAO extends SQLDAO implements DAO<Caricamento> {
 
     @Override
     public void doSave(Caricamento object) throws SQLException {
-        return GenericDAO.genericDoSave(Caricamento.TABLE_NAME, object.toHashMap(), source);
+        GenericDAO.genericDoSave(Caricamento.TABLE_NAME, object.toHashMap(), source);
     }
 
     @Override
     public List<Caricamento> doUpdate(String condition, Caricamento object) throws SQLException {
-        return GenericDAO.genericDoUpdate(Caricamento.TABLE_NAME, condition, object.toHashMap(), source);
+        return GenericDAO.genericDoUpdate(Caricamento.TABLE_NAME, condition, object.toHashMap(), new CaricamentoExtractor(), source);
     }
 
     @Override
@@ -68,6 +68,6 @@ public class CaricamentoDAO extends SQLDAO implements DAO<Caricamento> {
 
     @Override
     public List<Caricamento> doSaveOrUpdate(Caricamento object) throws SQLException {
-        return GenericDAO.genericDoSaveOrUpdate(Caricamento.TABLE_NAME, object.toHashMap(), source);
+        return GenericDAO.genericDoSaveOrUpdate(Caricamento.TABLE_NAME, object.toHashMap(), new CaricamentoExtractor(), source);
     }
 }

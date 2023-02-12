@@ -1,6 +1,11 @@
 package com.docapp.shared_docapp.models;
 
-public class Documenti_Visualizzati {
+import com.docapp.shared_docapp.dao_related.IEntity;
+
+import java.util.HashMap;
+
+public class Documenti_Visualizzati implements IEntity {
+    public static final String TABLE_NAME ="documenti_visualizzati";
     private int id_documento;
     private String email_studente;
 
@@ -25,5 +30,13 @@ public class Documenti_Visualizzati {
 
     public void setId_documento(int id_documento) {
         this.id_documento = id_documento;
+    }
+
+    @Override
+    public HashMap<String, ?> toHashMap() {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("id_documento", id_documento);
+        map.put("email_studente", email_studente);
+        return map;
     }
 }

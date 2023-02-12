@@ -1,6 +1,11 @@
 package com.docapp.shared_docapp.models;
 
-public class Conversazione {
+import com.docapp.shared_docapp.dao_related.IEntity;
+
+import java.util.HashMap;
+
+public class Conversazione implements IEntity {
+    public static final String TABLE_NAME ="conversazione";
     private String nome_conversazione,email_studente;
     private int id_conversazione ;
 
@@ -33,5 +38,14 @@ public class Conversazione {
 
     public void setNome_conversazione(String nome_conversazione) {
         this.nome_conversazione = nome_conversazione;
+    }
+
+    @Override
+    public HashMap<String, ?> toHashMap() {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("id_conversazione", id_conversazione);
+        map.put("email_studente", email_studente);
+        map.put("nome_conversazione", nome_conversazione);
+        return map;
     }
 }
