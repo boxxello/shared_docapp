@@ -54,7 +54,13 @@ public class Studente implements Serializable, IEntity {
 
     @Override
     public HashMap<String, ?> toHashMap() {
-        return null;
+
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("email", email);
+        map.put("nickname", nickname);
+        map.put("password", password);
+        map.put("is_admin", is_admin);
+        return map;
     }
 
     @Override
