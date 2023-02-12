@@ -1,4 +1,4 @@
-package com.docapp.shared_docapp.models;
+package com.docapp.shared_docapp.models.interazione;
 
 public class Interazione_Post {
     private int id_documento;

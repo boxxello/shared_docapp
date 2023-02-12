@@ -1,4 +1,4 @@
-package com.docapp.shared_docapp.models;
+package com.docapp.shared_docapp.models.documenti_vis;
 
 public class Documenti_Visualizzati {
     private int id_documento;

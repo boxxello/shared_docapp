@@ -1,4 +1,4 @@
-package com.docapp.shared_docapp.models;
+package com.docapp.shared_docapp.models.documento;
 
 import com.docapp.shared_docapp.dao_related.ResultSetExtractor;
 

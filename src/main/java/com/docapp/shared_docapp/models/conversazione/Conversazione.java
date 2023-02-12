@@ -1,4 +1,4 @@
-package com.docapp.shared_docapp.models;
+package com.docapp.shared_docapp.models.conversazione;
 
 public class Conversazione {
     private String nome_conversazione,email_studente;

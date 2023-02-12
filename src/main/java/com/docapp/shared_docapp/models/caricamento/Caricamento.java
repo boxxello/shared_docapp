@@ -1,4 +1,4 @@
-package com.docapp.shared_docapp.models;
+package com.docapp.shared_docapp.models.caricamento;
 
 public class Caricamento {
     private int id;

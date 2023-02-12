@@ -1,7 +1,6 @@
-package com.docapp.shared_docapp.models;
+package com.docapp.shared_docapp.models.caricamento;
 
 import com.docapp.shared_docapp.dao_related.ResultSetExtractor;
-import com.docapp.shared_docapp.models.studente.Studente;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

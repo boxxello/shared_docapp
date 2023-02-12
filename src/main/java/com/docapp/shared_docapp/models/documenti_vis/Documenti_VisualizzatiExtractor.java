@@ -1,4 +1,4 @@
-package com.docapp.shared_docapp.models;
+package com.docapp.shared_docapp.models.documenti_vis;
 
 import com.docapp.shared_docapp.dao_related.ResultSetExtractor;
 
