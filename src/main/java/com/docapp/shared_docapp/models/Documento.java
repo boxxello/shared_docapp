@@ -1,4 +1,4 @@
-package com.docapp.shared_docapp.models.documento;
+package com.docapp.shared_docapp.models;
 
 import java.io.Serializable;
 

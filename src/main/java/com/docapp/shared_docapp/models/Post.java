@@ -1,4 +1,4 @@
-package com.docapp.shared_docapp.models.post;
+package com.docapp.shared_docapp.models;
 
 public class Post {
     private String titolo, testo, id_post;

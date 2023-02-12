@@ -1,4 +1,4 @@
-package com.docapp.shared_docapp.models.messaggio;
+package com.docapp.shared_docapp.models;
 
 import java.sql.Timestamp;
 

@@ -1,5 +1,6 @@
-package com.docapp.shared_docapp.models.post;
+package com.docapp.shared_docapp.Extractors;
 
+import com.docapp.shared_docapp.models.Post;
 import com.docapp.shared_docapp.dao_related.ResultSetExtractor;
 
 import java.sql.ResultSet;

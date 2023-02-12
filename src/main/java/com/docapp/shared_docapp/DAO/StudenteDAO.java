@@ -1,8 +1,10 @@
-package com.docapp.shared_docapp.models.studente;
+package com.docapp.shared_docapp.DAO;
 
 import com.docapp.shared_docapp.dao_related.DAO;
 import com.docapp.shared_docapp.dao_related.GenericDAO;
 import com.docapp.shared_docapp.dao_related.SQLDAO;
+import com.docapp.shared_docapp.models.Studente;
+import com.docapp.shared_docapp.Extractors.StudenteExtractor;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;

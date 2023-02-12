@@ -1,9 +1,5 @@
 package com.docapp.shared_docapp.dao_related;
 
-import com.docapp.shared_docapp.models.studente.Studente;
-import com.docapp.shared_docapp.models.studente.StudenteExtractor;
-import javafx.scene.chart.PieChart;
-
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

@@ -1,6 +1,7 @@
-package com.docapp.shared_docapp.models.caricamento;
+package com.docapp.shared_docapp.models;
 
 public class Caricamento {
+    public static final String TABLE_NAME ="caricamento" ;
     private int id;
     private String email;
 

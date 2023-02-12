@@ -1,5 +1,6 @@
-package com.docapp.shared_docapp.models.feedback;
+package com.docapp.shared_docapp.Extractors;
 
+import com.docapp.shared_docapp.models.Feedback;
 import com.docapp.shared_docapp.dao_related.ResultSetExtractor;
 
 import java.sql.ResultSet;
