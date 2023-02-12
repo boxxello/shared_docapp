@@ -13,6 +13,5 @@ public class Documenti_VisualizzatiExtractor implements ResultSetExtractor<Docum
         documentiVisualizzati.setEmail_studente(rs.getString("studente"));
 
         return documentiVisualizzati;
-
     }
 }
