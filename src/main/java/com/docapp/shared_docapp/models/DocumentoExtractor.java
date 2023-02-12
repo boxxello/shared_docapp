@@ -18,7 +18,6 @@ public class DocumentoExtractor implements ResultSetExtractor<Documento> {
         documento.setPath(rs.getString("percorso"));
         documento.setDimensione(rs.getInt("dimensione"));
 
-
         return documento;
     }
 }
