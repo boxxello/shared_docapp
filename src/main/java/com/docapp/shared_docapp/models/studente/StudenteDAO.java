@@ -21,13 +21,13 @@ public class StudenteDAO extends SQLDAO implements DAO<Studente> {
 
     @Override
     public List<Studente> doRetrieveByConditionWithLimit(String condition, int limit) throws SQLException {
-        return null;
+        return GenericDAO.genericDoRetrieveByConditionWithLimit(Studente.TABLE_NAME, condition, limit, new StudenteExtractor(), source);
     }
 
 
     @Override
     public List<Studente> doRetrieveByConditionWithLimitAndOffset(String condition, int limit, int offset) throws SQLException {
-        return null;
+        return GenericDAO.genericDoRetrieveByConditionWithLimitAndOffset(Studente.TABLE_NAME, condition, limit, offset, new StudenteExtractor(), source);
     }
 
 
@@ -64,12 +64,13 @@ public class StudenteDAO extends SQLDAO implements DAO<Studente> {
     }
 
     @Override
-    public void doDelete(Studente object) throws SQLException {
-
+    public boolean doDelete(String condition) throws SQLException {
+        return GenericDAO.genericDoDelete(Studente.TABLE_NAME, condition, source);
     }
 
     @Override
-    public void doSaveOrUpdate(Studente object) throws SQLException {
+    public List<Studente> doSaveOrUpdate(Studente object) throws SQLException {
+        return GenericDAO.genericDoSaveOrUpdate(Studente.TABLE_NAME, object.toHashMap(), new StudenteExtractor(), source);
 
     }
 

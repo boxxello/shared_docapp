@@ -2,6 +2,7 @@ package com.docapp.shared_docapp.dao_related;
 
 import com.docapp.shared_docapp.models.studente.Studente;
 import com.docapp.shared_docapp.models.studente.StudenteExtractor;
+import javafx.scene.chart.PieChart;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -71,8 +72,7 @@ public class GenericDAO<T> {
      * e verifico se è andato a buon fine restituendo rows > 0
      **/
 
-    public static <E extends ResultSetExtractor<T>, T> List<T> genericDoUpdate(String table, String condition, Map<String, ?> values,
-                                                                               E extractor, DataSource source) throws SQLException {
+    public static <E extends ResultSetExtractor<T>, T> List<T> genericDoUpdate(String table, String condition, Map<String, ?> values, E extractor, DataSource source) throws SQLException {
         //ritorna la lista di oggetti aggiornati
         final List<T> entity = new ArrayList<>();
         try (Connection conn = source.getConnection()) {
@@ -109,7 +109,7 @@ public class GenericDAO<T> {
      * condizioni di inconsistenza dei dati
      **/
 
-    public static boolean genericDoDelete(String table, String condition, DataSource source) throws SQLException {
+    public static boolean genericDoDelete(String table, String  condition, DataSource source) throws SQLException {
 
         int rows;
         try (Connection conn = source.getConnection()) {
@@ -196,7 +196,7 @@ public class GenericDAO<T> {
         final List<T> entity = new ArrayList<>();
 
         try (Connection conn = source.getConnection()) {
-            QueryBuilder query_builder= QueryBuilder.SELECT("*").FROM(table);
+            QueryBuilder query_builder = QueryBuilder.SELECT("*").FROM(table);
             for (Map.Entry<String, String> entry : hashmap.entrySet()) {
                 query_builder.WHERE(entry.getKey() + " = " + entry.getValue());
             }
@@ -213,5 +213,76 @@ public class GenericDAO<T> {
             }
         }
         return entity;
+    }
+
+    public static <E extends ResultSetExtractor<T>, T> List<T> genericDoRetrieveByConditionWithLimit(String table, String condition, int limit, E extractor, DataSource source) throws SQLException {
+
+        final List<T> entity = new ArrayList<>();
+
+        try (Connection conn = source.getConnection()) {
+
+            String query = QueryBuilder.SELECT("*").FROM(table).WHERE(condition).LIMIT(limit).toString();
+
+            logger.info("[GENERIC-DO-RETRIEVE-BY-CONDITION-WITH-LIMIT] " + query);
+
+            try (PreparedStatement ps = conn.prepareStatement(query)) {
+                ResultSet set = ps.executeQuery();
+
+                while (set.next()) {
+                    entity.add(extractor.extract(set));
+                }
+            }
+        }
+        return entity;
+    }
+
+    public static <E extends ResultSetExtractor<T>, T> List<T> genericDoRetrieveByConditionWithLimitAndOffset(String table, String condition, int limit, int offset, E extractor, DataSource source) throws SQLException {
+
+        final List<T> entity = new ArrayList<>();
+
+        try (Connection conn = source.getConnection()) {
+
+            String query = QueryBuilder.SELECT("*").FROM(table).WHERE(condition).LIMIT(offset, limit).toString();
+
+            logger.info("[GENERIC-DO-RETRIEVE-BY-CONDITION-WITH-LIMIT-AND-OFFSET] " + query);
+
+            try (PreparedStatement ps = conn.prepareStatement(query)) {
+                ResultSet set = ps.executeQuery();
+
+                while (set.next()) {
+                    entity.add(extractor.extract(set));
+                }
+            }
+        }
+        return entity;
+    }
+    //doSaveOrUpdate
+
+    public static <E extends ResultSetExtractor<T>, T> List<T> genericDoSaveOrUpdate(String table, HashMap<String, ?> object, E extractor, DataSource source) throws SQLException {
+
+        final List<T> entity = new ArrayList<>();
+
+        try (Connection conn = source.getConnection()) {
+
+            String query_select_before_update = QueryBuilder.SELECT("*").FROM(table).WHERE("id = " + object.get("id")).toString();
+            String query = QueryBuilder.UPDATE(table).SET(object).WHERE("id = " + object.get("id")).toString();
+
+            logger.info("[GENERIC-DO-SAVE-OR-UPDATE] " + query);
+
+            try (PreparedStatement ps = conn.prepareStatement(query_select_before_update)) {
+                ResultSet set = ps.executeQuery();
+
+                while (set.next()) {
+                    entity.add(extractor.extract(set));
+                }
+
+            }
+            try (PreparedStatement ps = conn.prepareStatement(query)) {
+                ps.executeUpdate();
+            }
+
+        }
+        return entity;
+
     }
 }
