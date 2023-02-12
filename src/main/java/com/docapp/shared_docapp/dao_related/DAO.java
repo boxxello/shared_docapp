@@ -16,6 +16,6 @@ public interface DAO<T> {
     List<T> doRetrieveAllWithLimitAndOffset(int limit, int offset) throws SQLException;
     void doSave(T object) throws SQLException;
     List<T> doUpdate(String condition, T object) throws SQLException;
-    void doDelete(T object) throws SQLException;
-    void doSaveOrUpdate(T object) throws SQLException;
+    boolean doDelete(String condition) throws SQLException;
+    List<T> doSaveOrUpdate(T object) throws SQLException;
 }

@@ -12,7 +12,6 @@ import com.google.gson.GsonBuilder;
 public class GenericProxyDAO {
 
     private final static Logger logger = Logger.getLogger(GenericProxyDAO.class.getName());
-
     private GenericProxyDAO() {
     }
 
@@ -30,6 +29,7 @@ public class GenericProxyDAO {
 
 
     }
+
 
     public static <T> List<T> doRetrieveByConditionWithLimit(String condition, int limit, DAO<T> dao, PrintWriter out) throws SQLException {
         List<T> result = dao.doRetrieveByConditionWithLimit(condition, limit);
@@ -124,7 +124,7 @@ public class GenericProxyDAO {
     }
 
     //doUpdate
-    public static <T> void doUpdate(String condition, T entity, DAO<T> dao, PrintWriter out) throws SQLException {
+    public static <T> List<T>  doUpdate(String condition, T entity, DAO<T> dao, PrintWriter out) throws SQLException {
         List<T> result =  dao.doUpdate(condition, entity);
 
         Gson builder = new GsonBuilder().setPrettyPrinting().create();
@@ -135,13 +135,13 @@ public class GenericProxyDAO {
         map.put("result", json);
         //send response
         out.println(builder.toJson(map));
-
+        return result;
 
     }
 
-    //doDelete
-    public static <T> void doDelete(T entity, DAO<T> dao, PrintWriter out) throws SQLException {
-        dao.doDelete(entity);
+    //doDeletes
+    public static <T> boolean doDelete(String condition, T entity, DAO<T> dao, PrintWriter out) throws SQLException {
+        dao.doDelete(condition);
         Gson builder = new GsonBuilder().setPrettyPrinting().create();
 
         String json = builder.toJson(entity);
@@ -150,6 +150,7 @@ public class GenericProxyDAO {
         map.put("result", json);
         //send response
         out.println(builder.toJson(map));
+        return true;
     }
 
     //doSaveOrUpdate
